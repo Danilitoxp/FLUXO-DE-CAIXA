@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" href="/Painel/content/pedidos/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="content">
+        <div class="buscar">
+            <input type="text" id="buscar" placeholder="Digite Para Buscar">
+            <button id="openModal"><i class='bx bxs-plus-square'></i></button>
+        </div>
+
+        <div class="container-produtos">
+            <div class="descricao-produtos">
+                <input type="checkbox" class="header-checkbox" id="selectAll">
+                <p class="header-item"></p>
+                <p class="header-item">Descrição</p>
+                <p class="header-item">Código (SKU)</p>
+                <p class="header-item">Unidade</p>
+                <p class="header-item">Preço</p>
+                <p class="header-item">Estoque</p>
+            </div>
+
+            <div class="produtos" id="productList">
+                <div class="produto">
+                    <input type="checkbox" class="item-checkbox">
+                    <p class="header-item"><img src="/assets/Sa7224326a77e4f76b67571c8b6c2ff0fL.webp" width="70px" alt=""></p>
+                    <p class="header-item">Bolsa de fazer nao sei oq</p>
+                    <p class="header-item">230052</p>
+                    <p class="header-item">UN</p>
+                    <p class="header-item">R$ 765,00</p>
+                    <p class="header-item">30</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div id="actionButtons" class="action-buttons">
+            <button id="editButton">Editar</button>
+            <button id="deleteButton">Excluir</button>
+        </div>
+        
+    </div>
+
+    <!-- Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2 id="modalTitle">Adicionar Produto</h2>
+            <form id="productForm">
+                <label for="productName">Nome:</label>
+                <input type="text" id="productName" name="productName" required>
+
+                <label for="productSKU">Código (SKU):</label>
+                <input type="text" id="productSKU" name="productSKU" required>
+
+                <label for="productUnit">Unidade:</label>
+                <input type="text" id="productUnit" name="productUnit" required>
+
+                <label for="sellingPrice">Preço:</label>
+                <input type="number" id="sellingPrice" name="sellingPrice" step="0.01" required>
+
+                <label for="stock">Estoque:</label>
+                <input type="number" id="stock" name="stock" required>
+
+                <label for="productImage">Foto:</label>
+                <input type="file" id="productImage" name="productImage" accept="image/*">
+                <img id="imagePreview" src="" alt="Imagem do Produto">
+
+                <button type="submit">Adicionar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

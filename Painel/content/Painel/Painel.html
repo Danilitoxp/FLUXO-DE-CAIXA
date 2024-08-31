@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Painel/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <main>
+        <div class="container" id="content">
+            <div class="contas">
+                <div class="aReceber">
+                    <div class="title">A Receber</div>
+                    <div class="blocos">
+                        <div class="vencidos">
+                            <h3>R$ <span>520,00</span></h3>
+                            <p>Vencidos</p>
+                        </div>
+                        <div class="vencerao">
+                            <h3>R$ <span>2.780,00</span></h3>
+                            <p>Vencem Hoje</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="aPagar">
+                    <div class="title">A Pagar</div>
+                    <div class="blocos">
+                        <div class="vencidos">
+                            <h3>R$ <span>520,00</span></h3>
+                            <p>Vencidos</p>
+                        </div>
+                        <div class="vencerao">
+                            <h3>R$ <span>2.780,00</span></h3>
+                            <p>Vencem Hoje</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container2">
+                <div class="contas-financeiras">
+                    <h3>Contas Financeiras</h3>
+
+                    <div class="content">
+                        <div class="valor-total">
+                            <h1>R$ <span>35.347,00</span></h1>
+                            <p>Valor Total</p>
+                        </div>
+
+                        <div class="conta">
+                            <div class="icon">
+                                <i class='bx bxs-bank'></i>
+                            </div>
+
+                            <div class="infos">
+                                <p>Conta Corrente</p>
+                                <p>Banco 1</p>
+                                <p>Valor: <span>R$ 5.3214,00</span></p>
+                            </div>
+                        </div>
+
+                        <div class="conta">
+                            <div class="icon">
+                                <i class='bx bxs-bank'></i>
+                            </div>
+
+                            <div class="infos">
+                                <p>Conta Corrente</p>
+                                <p>Banco 1</p>
+                                <p>Valor: <span>R$ 5.3214,00</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contas-financeiras">
+                    <div class="cima">
+                        <h3>Fluxo de Caixa Diário</h3>
+                        <button onclick="window.print()"><i class='bx bx-download'></i></button>
+
+                    </div>
+                    
+
+                    <div class="content">
+                        <canvas id="myChart1"></canvas>
+                    </div>
+                </div>
+
+                <div class="contas-financeiras">
+                    <div class="cima">
+                        <h3>Gráfico de Faturamento Mensal</h3>
+                        <button onclick="window.print()"><i class='bx bx-download'></i></button>
+                    </div>
+
+                    <div class="content">
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="./script.js"></script>
+</body>
+</html>
