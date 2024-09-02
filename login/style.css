@@ -190,6 +190,10 @@ body{
     transform: translateX(50%);
 }
 
+h1 {
+    text-align: center;
+}
+
 .toggle-panel{
     position: absolute;
     width: 50%;

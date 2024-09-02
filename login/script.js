@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const firebaseConfig = {
@@ -17,17 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Manipula a troca entre as seções
     const container = document.getElementById('container');
-    const registerBtn = document.getElementById('register');
-    const loginBtn = document.getElementById('login');
+    const registerLink = document.getElementById('register');
     const loadingOverlay = document.getElementById('loading');
     const signInForm = document.querySelector('.sign-in form');
+    const forgotPasswordForm = document.querySelector('.sign-up form');
 
-    registerBtn.addEventListener('click', () => {
+    registerLink.addEventListener('click', () => {
         container.classList.add("active");
-    });
-
-    loginBtn.addEventListener('click', () => {
-        container.classList.remove("active");
     });
 
     function showLoading() {
@@ -46,47 +42,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Manipulação do formulário de registro
-    const signUpForm = document.querySelector('.sign-up form');
-    const signUpError = document.getElementById('sign-up-error');
-    const signUpSuccess = document.getElementById('sign-up-success');
+    // Manipulação do formulário de recuperação de senha
+    const forgotPasswordError = document.getElementById('sign-up-error');
+    const forgotPasswordSuccess = document.getElementById('sign-up-success');
 
-    signUpForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+    forgotPasswordForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede o comportamento padrão de envio do formulário
 
-        const name = signUpForm.querySelector('input[type="text"]').value;
-        const email = signUpForm.querySelector('input[type="email"]').value;
-        const password = signUpForm.querySelector('input[type="password"]').value;
+        const email = forgotPasswordForm.querySelector('input[type="email"]').value;
 
-        if (!name || !email || !password) {
-            signUpError.textContent = "Todos os campos são obrigatórios.";
-            signUpError.style.display = 'block';
+        if (!email) {
+            forgotPasswordError.textContent = "O campo de email é obrigatório.";
+            forgotPasswordError.style.display = 'block';
             return;
         }
 
         showLoading();
 
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Usuário cadastrado com sucesso
-                const user = userCredential.user;
-                console.log('Usuário registrado:', user);
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                // Email de redefinição enviado com sucesso
                 hideLoading();
-                signUpError.style.display = 'none';
-                signUpSuccess.textContent = "Registro efetuado com sucesso!";
-                signUpSuccess.style.display = 'block';
-                setTimeout(() => {
-                    signUpSuccess.style.display = 'none';
-                    container.classList.remove("active");
-                }, 2000); // Retorna ao login após 2 segundos
+                forgotPasswordError.style.display = 'none';
+                forgotPasswordSuccess.textContent = "Instruções para redefinir sua senha foram enviadas para seu email.";
+                forgotPasswordSuccess.style.display = 'block';
             })
             .catch((error) => {
-                // Erro ao cadastrar o usuário
-                console.error('Erro ao registrar usuário:', error);
+                // Erro ao enviar email de redefinição
+                console.error('Erro ao enviar email de redefinição:', error);
                 hideLoading();
-                signUpSuccess.style.display = 'none';
-                signUpError.textContent = `Erro: ${error.message}`;
-                signUpError.style.display = 'block';
+                forgotPasswordSuccess.style.display = 'none';
+                forgotPasswordError.textContent = `Erro: ${error.message}`;
+                forgotPasswordError.style.display = 'block';
             });
     });
 
@@ -105,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Oculta o conteúdo e mostra o carregamento após um breve atraso
         showLoading();
 
         signInWithEmailAndPassword(auth, email, password)
